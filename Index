@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .calculator button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .calculator button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Number Converter</h2>
+        <input type="number" id="numberInput" placeholder="Enter a number">
+        <button onclick="convertNumber()">Convert</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function convertNumber() {
+            const num = parseFloat(document.getElementById('numberInput').value);
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(num)) {
+                resultDiv.textContent = 'Please enter a valid number';
+                return;
+            }
+
+            const abbreviations = ["", "K", "Million", "Billion", "Trillion", "Quadrillion", "Quintillion"];
+            let value = num;
+            let index = 0;
+
+            while (value >= 1000 && index < abbreviations.length - 1) {
+                value /= 1000;
+                index++;
+            }
+
+            resultDiv.textContent = `${value.toFixed(2)} ${abbreviations[index]}`;
+        }
+    </script>
+</body>
+</html>
